@@ -1,0 +1,152 @@
+# Contenido de la web. Es lo único que rellena la plataforma NoExpertise.
+# Las secciones se muestran en el orden de este fichero. Para ocultar una: activa: false.
+# Apartado nuevo: un id propio (es su ancla, /#id) con `tipo:` = el diseño de otra sección o `texto`.
+nombre: Sal i Lli
+eslogan: Moda mediterránea de lino, algodón y lana en el casco antiguo de Palma.
+sector: moda
+logo: ""          # ruta a una imagen en public/ (p. ej. /logo.svg). Vacío = nombre en texto.
+colores:
+  primario: "#121212"   # bandas oscuras, botones y textos fuertes
+  acento: "#2b44d6"     # azul cobalto: bandas de color, etiquetas y líneas
+  fondo: "#ffffff"
+  texto: "#161616"
+contacto:
+  telefono: "971 72 48 19"
+  email: hola@salilli.es
+  direccion: "Carrer de Sant Miquel 41, 07002 Palma (Illes Balears)"
+  horario: "Lunes a viernes de 10:00 a 14:00 y de 17:00 a 20:30. Sábados de 10:00 a 14:00."
+  whatsapp: "+34 671 48 22 90"
+redes:
+  instagram: https://www.instagram.com/
+  facebook: https://www.facebook.com/
+  linkedin: ""
+menu:
+  - { texto: Colecciones, url: "/#colecciones" }
+  - { texto: Novedades, url: "/#productos" }
+  - { texto: Lookbook, url: "/#lookbook" }
+  - { texto: La tienda, url: "/#tienda" }
+  - { texto: Contacto, url: "/#contacto" }
+boton_cabecera: { texto: Escríbenos, url: "/#contacto" }
+seo:
+  titulo: Sal i Lli · Tienda de moda mediterránea en Palma
+  descripcion: "Ropa de mujer y hombre en lino, algodón y lana, y complementos hechos a mano. Tienda en el casco antiguo de Palma y consultas por WhatsApp."
+  tipo: ClothingStore   # tipo de schema.org
+marca_pie: true   # «Web creada con NoExpertise» en el pie
+
+secciones:
+  hero:
+    activa: true
+    antetitulo: Otoño-Invierno 2026 · Palma
+    titulo: Prendas que duran más que una temporada
+    texto: "Lino, algodón y lana de talleres pequeños. Pruébatelo en la tienda o pregúntanos por WhatsApp y te lo apartamos."
+    imagen: /fotos/hero.jpg
+    cta: { texto: Ver novedades, url: "/#productos" }
+    cta_secundario: { texto: Visita la tienda, url: "/#tienda" }
+
+  colecciones:
+    activa: true
+    antetitulo: Colecciones
+    titulo: Tres armarios, una misma manera de vestir
+    texto: "Tejidos naturales, cortes cómodos y colores de la isla. Pulsa una colección para ver sus prendas."
+    colecciones:   # nombre igual que productos[].categoria para que filtre las novedades
+      - { nombre: Mujer, texto: "Vestidos, camisas y punto para todo el año.", imagen: /fotos/coleccion-mujer.jpg }
+      - { nombre: Hombre, texto: "Lino lavado, pana fina y algodón grueso.", imagen: /fotos/coleccion-hombre.jpg }
+      - { nombre: Complementos, texto: "Bolsos de rafia, alpargatas y pañuelos hechos a mano.", imagen: /fotos/coleccion-complementos.jpg }
+
+  sobre:
+    activa: true
+    antetitulo: La casa
+    titulo: Una tienda pequeña en el corazón de Palma
+    texto: |
+      Abrimos en 2012 en la calle de Sant Miquel con una idea sencilla: vender poca ropa, bien hecha y que se pueda llevar muchos años. Trabajamos con talleres de Mallorca, de Valencia y del norte de Portugal que conocemos uno a uno.
+
+      Aquí no hay prisa. Te ayudamos a encontrar tu talla, te arreglamos el bajo en el día y te avisamos cuando llega lo que buscabas.
+    imagen: /fotos/marca.jpg
+    cta: { texto: Conoce la tienda, url: "/#tienda" }
+
+  productos:
+    activa: true
+    antetitulo: Novedades
+    titulo: Recién llegado a la tienda
+    texto: "Precios con IVA. Si no ves tu talla, pregúntanos: la pedimos al taller."
+    boton: Pregunta por WhatsApp
+    cta: { texto: "¿Buscas otra prenda? Escríbenos", url: "/#contacto" }
+    productos:
+      - { nombre: Vestido camisero de lino, ref: SL-2611, categoria: Mujer, texto: "Lino lavado con cinturón del mismo tejido. Fresco y sin planchar.", tallas: "XS; S; M; L; XL", precio: "89 €", estado: Nuevo, imagen: /fotos/producto-1.jpg }
+      - { nombre: Pantalón ancho de crepé, ref: SL-2604, categoria: Mujer, texto: "Tiro alto, pinzas y bolsillos laterales. Cae muy bien.", tallas: "S; M; L", precio: "69 €", estado: "", imagen: /fotos/producto-2.jpg }
+      - { nombre: Jersey de punto de algodón, ref: SL-2589, categoria: Mujer, texto: "Punto grueso de algodón orgánico, cuello redondo.", tallas: "S; M; L", precio: "45 €", estado: Rebajas, imagen: /fotos/producto-3.jpg }
+      - { nombre: Camisa de lino lavado, ref: SL-2617, categoria: Hombre, texto: "Cuello italiano y botones de nácar. En arena, blanco y azul.", tallas: "S; M; L; XL; XXL", precio: "65 €", estado: Nuevo, imagen: /fotos/producto-4.jpg }
+      - { nombre: Chaqueta de pana fina, ref: SL-2560, categoria: Hombre, texto: "Forro de algodón y tres bolsillos. Para las tardes de otoño.", tallas: "M; L; XL", precio: "129 €", estado: "", imagen: /fotos/producto-5.jpg }
+      - { nombre: Bolso de rafia y piel, ref: SL-2598, categoria: Complementos, texto: "Tejido a mano en Mallorca, asas de piel curtida.", tallas: Talla única, precio: "95 €", estado: Nuevo, imagen: /fotos/producto-6.jpg }
+
+  cita:
+    activa: true
+    declaracion: "Comprar menos, elegir mejor y llevarlo muchos años. Así entendemos la moda."
+    autor: "Margalida Ferrer, fundadora de Sal i Lli"
+
+  lookbook:
+    activa: true
+    antetitulo: Lookbook
+    titulo: Otoño en la isla
+    texto: "Las prendas de la temporada fotografiadas entre el casco antiguo y el mar."
+    galeria:
+      - /fotos/look-1.jpg
+      - /fotos/look-2.jpg
+      - /fotos/look-3.jpg
+      - /fotos/look-4.jpg
+    cta: { texto: Síguenos en Instagram, url: "https://www.instagram.com/" }
+
+  ventajas:
+    activa: true
+    antetitulo: En la tienda
+    titulo: Mucho más que vender ropa
+    items:
+      - { titulo: Arreglos en el día, texto: "Bajos y mangas sin coste en las prendas de temporada.", icono: tijeras }
+      - { titulo: Asesoría de estilo, texto: "Pide cita y preparamos contigo un armario que combine.", icono: percha }
+      - { titulo: Te lo apartamos, texto: "Escríbenos por WhatsApp y te guardamos la prenda 48 horas.", icono: whatsapp }
+      - { titulo: Envíos en Mallorca, texto: "Lo llevamos a casa en toda la isla y a la península.", icono: bolsa }
+
+  tienda:
+    activa: true
+    antetitulo: La tienda
+    titulo: Ven a probártelo
+    texto: "A dos minutos de la plaza Mayor. Probadores amplios, luz natural y un café mientras decides."
+    imagen: /fotos/tienda.jpg
+    horario:
+      - { dia: Lunes a viernes, horas: "10:00 – 14:00 y 17:00 – 20:30" }
+      - { dia: Sábados, horas: "10:00 – 14:00" }
+      - { dia: Domingos y festivos, horas: Cerrado }
+
+  opiniones:
+    activa: true
+    antetitulo: Opiniones
+    titulo: Lo que dicen quienes vuelven
+    testimonios:
+      - { texto: "Me arreglaron el bajo del pantalón en una hora y me ayudaron a elegir la talla sin agobios. Ya es mi tienda.", autor: Catalina R., nota: Google }
+      - { texto: "Las camisas de lino son de las buenas: llevo tres veranos con la misma y sigue perfecta.", autor: Toni M., nota: Google }
+      - { texto: "Pregunté por WhatsApp por un bolso, me lo guardaron y lo recogí al día siguiente. Trato de diez.", autor: Laura P. }
+
+  preguntas:
+    activa: true
+    antetitulo: Preguntas frecuentes
+    titulo: Antes de venir
+    preguntas:
+      - { pregunta: ¿Puedo reservar una prenda por WhatsApp?, respuesta: "Sí. Mándanos el nombre o la foto de la prenda y tu talla y te la guardamos 48 horas en la tienda." }
+      - { pregunta: ¿Hacéis envíos?, respuesta: "Sí, a toda Mallorca en 24 horas y a la península en 48 a 72 horas. Pagas por transferencia o con un enlace de pago." }
+      - { pregunta: ¿Cómo funcionan los cambios y devoluciones?, respuesta: "Tienes 30 días para cambiar o devolver la prenda con el ticket y sin usar. Las rebajas se cambian, pero no se devuelven." }
+      - { pregunta: ¿Hacéis arreglos?, respuesta: "Sí. Los bajos y las mangas de las prendas de temporada son gratis y suelen estar el mismo día." }
+      - { pregunta: ¿Tenéis tarjeta regalo?, respuesta: "Sí, del importe que quieras. Te la preparamos en la tienda o te la mandamos por WhatsApp." }
+
+  cta:
+    activa: true
+    antetitulo: ¿Lo tienes en mi talla?
+    titulo: Pregúntanos por WhatsApp y te lo apartamos
+    texto: "Mándanos la foto o el nombre de la prenda. Te contestamos en horario de tienda."
+    cta: { texto: Escribir por WhatsApp, url: "https://wa.me/34671482290" }
+    cta_secundario: { texto: Llamar a la tienda, url: "tel:+34971724819" }
+
+  contacto:
+    activa: true
+    antetitulo: Contacto
+    titulo: Escríbenos
+    texto: "Dudas de tallas, encargos, tarjetas regalo o cita de asesoría. Te respondemos en el día."

@@ -1,0 +1,19 @@
+---
+// Titular de sección (antetítulo con línea de color + título en serif enorme + texto). Adaptado de AstroWind
+// (Headline.astro), © onWidget, MIT. `lado`: el texto va a la derecha del título en escritorio (titular partido).
+interface Props { titulo?: string; antetitulo?: string; texto?: string; alinear?: 'izquierda' | 'centro'; class?: string; nivel?: 1 | 2; lado?: boolean }
+const { titulo, antetitulo, texto, alinear = 'izquierda', class: clase = '', nivel = 2, lado = false } = Astro.props;
+const H = nivel === 1 ? 'h1' : 'h2';
+---
+
+{
+  (titulo || antetitulo || texto) && (
+    <div class:list={['titular', { 'titular--centro': alinear === 'centro', 'lg:grid lg:grid-cols-12 lg:items-end lg:gap-10': lado }, clase]}>
+      <div class:list={{ 'lg:col-span-7': lado }}>
+        {antetitulo && <p class="antetitulo">{antetitulo}</p>}
+        {titulo && <H class="titulo-seccion">{titulo}</H>}
+      </div>
+      {texto && <p class:list={['titular-texto', { 'lg:col-span-4 lg:col-start-9 lg:mt-0': lado }]}>{texto}</p>}
+    </div>
+  )
+}

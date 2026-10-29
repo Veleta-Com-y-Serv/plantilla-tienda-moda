@@ -1,0 +1,54 @@
+---
+// Cabecera fija a todo el ancho, como la de una revista: menú a la izquierda, nombre en el centro (serif en
+// mayúsculas espaciadas) y botón (site.yaml → boton_cabecera) a la derecha. En móvil, nombre + menú plegable
+// (<details>, sin JavaScript para abrir). Si la portada es la primera sección y tiene foto, la cabecera va
+// transparente encima de ella y se vuelve blanca al bajar (script mínimo); si no, siempre blanca y deja su hueco.
+// Estilos: .cabecera--moda en src/styles/global.css.
+import { site, seccionesActivas } from '../data/site';
+import type { Enlace } from '../data/site';
+interface Props { variante?: string; cta?: Enlace | null }
+const { variante = 'moda', cta = null } = Astro.props;
+const primera = seccionesActivas()[0];
+const portada = primera ? site.secciones[primera] : null;
+const sobreHero =
+  Astro.url.pathname === '/' && !!portada && (primera === 'hero' || portada.tipo === 'hero') && !!portada.imagen;
+---
+
+<header class:list={['cabecera', `cabecera--${variante}`, { 'sobre-hero': sobreHero }]}>
+  <div class="contenedor cabecera-fila">
+    <nav class="cabecera-nav" aria-label="Menú principal">
+      {site.menu.map((e) => <a href={e.url}>{e.texto}</a>)}
+    </nav>
+    <a href="/" class="marca" aria-label={`${site.nombre}, inicio`}>
+      {site.logo ? <img src={site.logo} alt={site.nombre} class="marca-logo" width="160" height="40" /> : <span class="marca-nombre">{site.nombre}</span>}
+    </a>
+    {cta && cta.url && <a href={cta.url} class="btn cabecera-cta">{cta.texto}</a>}
+    {
+      site.menu.length > 0 && (
+        <details class="menu-movil">
+          <summary>
+            <span class="menu-movil-icono" aria-hidden="true" />
+            <span>Menú</span>
+          </summary>
+          <nav class="menu-movil-panel" aria-label="Menú">
+            {site.menu.map((e) => <a href={e.url}>{e.texto}</a>)}
+            {cta && cta.url && <a href={cta.url} class="btn">{cta.texto}</a>}
+          </nav>
+        </details>
+      )
+    }
+  </div>
+</header>
+{!sobreHero && <div class="cabecera-hueco" aria-hidden="true" />}
+<script is:inline>
+  (function () {
+    var c = document.querySelector('.cabecera');
+    document.querySelectorAll('.menu-movil a').forEach(function (a) {
+      a.addEventListener('click', function () { a.closest('details').open = false; });
+    });
+    if (!c || !c.classList.contains('sobre-hero')) return;
+    var mirar = function () { c.classList.toggle('solida', window.scrollY > 24); };
+    window.addEventListener('scroll', mirar, { passive: true });
+    mirar();
+  })();
+</script>

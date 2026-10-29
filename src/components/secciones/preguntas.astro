@@ -1,0 +1,39 @@
+---
+// Preguntas frecuentes: banda clara con el titular a la izquierda (fijo al bajar en escritorio) y el acordeón sin
+// JavaScript (details/summary) a la derecha, con preguntas en serif y líneas finas. Vacía, no se pinta.
+import { seccion } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const preguntas = s ? s.preguntas.filter((p) => p.pregunta) : [];
+---
+
+{
+  s && preguntas.length > 0 && (
+    <section id={Astro.props.id} class="banda-clara py-[var(--ritmo)] md:py-[var(--ritmo-md)]">
+      <div class="contenedor grid gap-6 lg:grid-cols-12 lg:gap-10">
+        <div class="lg:col-span-5">
+          <Titular class="lg:sticky lg:top-[calc(var(--alto-cabecera)+2rem)]" antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        </div>
+        <div class="border-t border-[var(--c-texto)] lg:col-span-7">
+          {preguntas.map((p) => (
+            <details class="pregunta group border-b border-[var(--c-linea)]">
+              <summary class="flex min-h-11 cursor-pointer list-none items-center justify-between gap-6 py-6">
+                <span class="text-[clamp(1.25rem,2vw,1.7rem)] leading-snug" style="font-family: var(--fuente-titulos)">{p.pregunta}</span>
+                <span class="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-[var(--c-linea-fuerte)] transition-transform group-open:rotate-45 group-open:border-[var(--c-acento)] group-open:bg-[var(--c-acento)] group-open:text-[var(--c-sobre-acento)]">
+                  <Icono nombre="mas" tam={16} />
+                </span>
+              </summary>
+              {p.respuesta && <p class="max-w-[60ch] pb-7 pr-12 text-[var(--c-suave)]">{p.respuesta}</p>}
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .pregunta summary::-webkit-details-marker { display: none; }
+</style>

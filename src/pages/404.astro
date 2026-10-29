@@ -1,0 +1,21 @@
+---
+// Página no encontrada con el diseño de la plantilla: banda negra a casi pantalla completa con «404» en serif enorme.
+import Base from '../layouts/Base.astro';
+import { buscarSeccion } from '../data/site';
+const productos = buscarSeccion('productos');
+---
+
+<Base titulo="Página no encontrada">
+  <section class="banda-oscura relative flex min-h-[78svh] items-center overflow-hidden">
+    <span class="pointer-events-none absolute -bottom-[0.18em] right-0 select-none leading-none opacity-10 text-[clamp(10rem,38vw,34rem)]" style="font-family: var(--fuente-titulos)" aria-hidden="true">404</span>
+    <div class="contenedor relative py-20">
+      <p class="antetitulo">Error 404</p>
+      <h1 class="mt-5 max-w-[14ch] text-[clamp(2.75rem,7vw,6.5rem)] leading-[.95]">Esta página no existe</h1>
+      <p class="mt-6 max-w-[42ch] opacity-80">Puede que el enlace esté mal o que la prenda ya no esté en la tienda.</p>
+      <div class="mt-10 flex flex-wrap gap-3">
+        <a class="btn btn--claro" href="/">Volver al inicio</a>
+        {productos && <a class="btn-sec" href={`/#${productos.id}`}>{productos.s.antetitulo || productos.s.titulo}</a>}
+      </div>
+    </div>
+  </section>
+</Base>

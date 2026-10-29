@@ -1,0 +1,64 @@
+---
+// La tienda: fila partida a sangre. A la izquierda, banda negra con antetítulo, título en serif, texto, la
+// dirección en grande (site.yaml → contacto.direccion), el horario en tabla (`horario: [{ dia, horas }]`; si está
+// vacío, contacto.horario) y los botones «Cómo llegar» (mapa) y «Llamar»; a la derecha, la foto de la tienda
+// tocando el borde de la ventana. Sin foto, la banda negra ocupa todo el ancho.
+import { seccion, site, tel, mapa } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const c = site.contacto;
+const horario = s ? s.horario.filter((h) => h.dia || h.horas) : [];
+const comoLlegar = s?.cta?.url ? s.cta : c.direccion ? { texto: 'Cómo llegar', url: mapa(c.direccion) } : null;
+const externo = (u = '') => /^https?:/.test(u);
+---
+
+{
+  s && (
+    <section id={Astro.props.id} class="banda-oscura">
+      <div class:list={['grid', s.imagen && 'lg:grid-cols-2']}>
+        <div class:list={['py-[var(--ritmo)] md:py-[var(--ritmo-md)]', s.imagen ? 'order-2 px-4 md:px-12 lg:order-1 xl:px-24' : 'contenedor']}>
+          <div class:list={['w-full', !s.imagen && 'grid gap-10 lg:grid-cols-12']}>
+            <div class:list={[!s.imagen && 'lg:col-span-6']}>
+              {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+              {s.titulo && <h2 class="titulo-seccion titulo-medio">{s.titulo}</h2>}
+              {s.texto && <p class="mt-6 max-w-[42ch] opacity-80">{s.texto}</p>}
+              {c.direccion && (
+                <address class="mt-10 not-italic">
+                  <span class="block text-[.68rem] font-semibold uppercase tracking-[.3em] opacity-60">Dirección</span>
+                  <span class="mt-2 block max-w-[24ch] text-[clamp(1.5rem,2.6vw,2.25rem)] leading-tight" style="font-family: var(--fuente-titulos)">{c.direccion}</span>
+                </address>
+              )}
+            </div>
+            <div class:list={[!s.imagen ? 'lg:col-span-5 lg:col-start-8' : 'mt-10']}>
+              {horario.length > 0 ? (
+                <dl class="max-w-[30rem] border-t border-white/25">
+                  {horario.map((h) => (
+                    <div class="flex flex-wrap justify-between gap-x-6 gap-y-1 border-b border-white/25 py-3.5">
+                      <dt class="text-[.72rem] font-semibold uppercase tracking-[.2em]">{h.dia}</dt>
+                      <dd class="opacity-85">{h.horas}</dd>
+                    </div>
+                  ))}
+                </dl>
+              ) : (
+                c.horario && <p class="max-w-[42ch] border-y border-white/25 py-4 opacity-85">{c.horario}</p>
+              )}
+              {(comoLlegar || c.telefono) && (
+                <div class="mt-8 flex flex-wrap gap-3">
+                  {comoLlegar && <a class="btn btn--claro" href={comoLlegar.url} rel={externo(comoLlegar.url) ? 'noopener' : undefined} target={externo(comoLlegar.url) ? '_blank' : undefined}>{comoLlegar.texto}</a>}
+                  {c.telefono && <a class="btn-sec" href={tel(c.telefono)}>Llamar · {c.telefono}</a>}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+        {s.imagen && (
+          <div class="relative order-1 aspect-[4/3] lg:order-2 lg:aspect-auto lg:min-h-[80svh]">
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1400} alto={1050} respaldo="/placeholders/foto.svg" class="absolute inset-0 h-full w-full object-cover" />
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}

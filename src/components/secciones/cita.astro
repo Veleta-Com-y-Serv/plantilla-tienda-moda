@@ -1,0 +1,28 @@
+---
+// Cita destacada: banda cobalto a todo el ancho con una frase en serif cursiva enorme (`declaracion`, o `texto`
+// si no la hay), comillas gigantes de adorno y la firma (`autor`) en mayúsculas espaciadas. Sin frase no se pinta.
+import { seccion } from '../../data/site';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const frase = s ? String(s.declaracion ?? '').trim() || String(s.texto ?? '').trim() || String(s.titulo ?? '').trim() : '';
+const autor = s ? String(s.autor ?? '').trim() : '';
+---
+
+{
+  s && frase && (
+    <section id={Astro.props.id} class="banda-acento relative overflow-hidden py-[var(--ritmo)] md:py-[calc(var(--ritmo-md)*1.15)]" aria-label={s.antetitulo || 'Cita'}>
+      <span class="comillas pointer-events-none absolute -top-8 right-2 select-none leading-none md:-top-20 md:right-10" aria-hidden="true">“</span>
+      <div class="contenedor relative">
+        {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+        <blockquote class="mt-6">
+          <p class="cursiva max-w-[20ch] text-[clamp(2.1rem,5.6vw,5.5rem)] leading-[1.05]" style="font-family: var(--fuente-titulos)">{frase}</p>
+          {autor && <footer class="mt-10 flex items-center gap-4 text-[.7rem] font-semibold uppercase tracking-[.3em]"><span class="h-px w-12 bg-current" aria-hidden="true" />{autor}</footer>}
+        </blockquote>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .comillas { font-family: var(--fuente-titulos); font-size: clamp(14rem, 34vw, 34rem); opacity: .16; }
+</style>

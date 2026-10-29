@@ -1,0 +1,49 @@
+---
+// Portada como la cubierta de una revista: foto a sangre a pantalla completa con velo oscuro abajo, antetítulo
+// con línea, título en serif enorme abajo a la izquierda y, a su derecha en escritorio, el texto corto y los dos
+// botones (cta y cta_secundario). Sin foto, banda negra a casi pantalla completa con la misma composición.
+// La cabecera va transparente encima cuando la portada es la primera sección y tiene foto (Header.astro).
+import { seccion } from '../../data/site';
+import { altHero } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string; primera?: boolean }
+const { id, primera = false } = Astro.props;
+const s = seccion(id);
+---
+
+{
+  s && (
+    <section id={id} class:list={['portada relative isolate flex min-h-[85svh] items-end overflow-hidden', s.imagen ? 'md:min-h-[100svh]' : 'banda-oscura']}>
+      {s.imagen && (
+        <>
+          <Imagen src={s.imagen} alt={altHero()} ancho={2400} alto={1350} prioridad={primera} respaldo="/placeholders/hero.svg" class="absolute inset-0 -z-20 h-full w-full object-cover object-[50%_30%]" />
+          <span class="portada-velo absolute inset-0 -z-10" aria-hidden="true" />
+        </>
+      )}
+      <div class:list={['contenedor relative w-full pb-12 md:pb-20', s.imagen ? 'pt-[calc(var(--alto-cabecera)+4rem)] text-white' : 'pt-16']}>
+        <div class="grid gap-8 lg:grid-cols-12 lg:items-end lg:gap-10">
+          <div class="lg:col-span-8">
+            {s.antetitulo && <p class="antetitulo portada-ante">{s.antetitulo}</p>}
+            {s.titulo && <h1 class="mt-5 max-w-[14ch] text-[clamp(3rem,9.2vw,8.75rem)] leading-[.92]">{s.titulo}</h1>}
+          </div>
+          {(s.texto || s.cta?.url || s.cta_secundario?.url) && (
+            <div class="lg:col-span-4 lg:pb-3">
+              {s.texto && <p class="max-w-[38ch] text-base opacity-90 md:text-lg">{s.texto}</p>}
+              {(s.cta?.url || s.cta_secundario?.url) && (
+                <div class="mt-7 flex flex-wrap gap-3">
+                  {s.cta?.url && <a class="btn btn--claro" href={s.cta.url}>{s.cta.texto}</a>}
+                  {s.cta_secundario?.url && <a class="btn-sec" href={s.cta_secundario.url}>{s.cta_secundario.texto}</a>}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .portada-velo { background: linear-gradient(to top, rgb(0 0 0 / .72) 0%, rgb(0 0 0 / .28) 45%, rgb(0 0 0 / .12) 70%, rgb(0 0 0 / .35) 100%); }
+  .portada-ante::before { background: currentColor; }
+</style>

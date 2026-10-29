@@ -1,0 +1,95 @@
+# Metadatos de la plantilla para el catálogo de NoExpertise.
+id: tienda-moda
+nombre: Tienda de moda
+descripcion: "Web editorial en blanco, negro y cobalto para boutiques, tiendas de ropa, calzado y complementos."
+sectores:
+  - { id: moda, nombre: Moda }
+  - { id: boutique, nombre: Boutique }
+  - { id: ropa, nombre: Tienda de ropa }
+  - { id: calzado, nombre: Calzado }
+  - { id: complementos, nombre: Complementos }
+  - { id: tienda, nombre: Tienda }
+secciones:
+  - { id: hero, nombre: Portada }
+  - { id: colecciones, nombre: Colecciones }
+  - { id: sobre, nombre: La casa }
+  - { id: productos, nombre: Novedades }
+  - { id: cita, nombre: Cita destacada }
+  - { id: lookbook, nombre: Lookbook }
+  - { id: ventajas, nombre: Servicios de la tienda }
+  - { id: tienda, nombre: La tienda }
+  - { id: opiniones, nombre: Opiniones }
+  - { id: preguntas, nombre: Preguntas frecuentes }
+  - { id: cta, nombre: Pregunta por WhatsApp }
+  - { id: contacto, nombre: Contacto }
+estilo: editorial
+plan_minimo: presencia
+version: 1.0.0
+base: astrowind
+demo_url: https://demo-plantilla-tienda-moda.noexpertise.com
+activa: true
+orden: 240
+
+# Asistente de puesta en marcha (NoExpertise): un paso por pantalla. Rutas del site sin índices;
+# tipos: texto y lista (la IA propone), datos, fotos, eleccion (colores y logo) y repaso.
+asistente:
+  - id: negocio
+    titulo: "Tu tienda"
+    pregunta: "¿Cómo se llama tu tienda y qué vendes?"
+    ayuda: "Qué tipo de ropa o complementos, para quién y en qué calle o barrio estás."
+    tipo: texto
+    campos: [nombre, eslogan, seo.titulo, seo.descripcion, secciones.hero.antetitulo, secciones.hero.titulo, secciones.hero.texto]
+  - id: contacto
+    titulo: "Cómo te encuentran"
+    pregunta: "¿Dónde está la tienda y cómo te pueden llamar o escribir?"
+    ayuda: "Con WhatsApp, cada prenda lleva su botón «Pregunta por WhatsApp». Lo que dejes vacío no sale en tu web."
+    tipo: datos
+    campos: [contacto.telefono, contacto.whatsapp, contacto.email, contacto.direccion, contacto.horario, redes.instagram, redes.facebook]
+  - id: colecciones
+    titulo: "Tus colecciones"
+    pregunta: "¿En qué grupos divides lo que vendes? Por ejemplo: mujer, hombre, calzado, complementos. Uno por línea."
+    ayuda: "Si lo prefieres, añádelas luego en Contenido."
+    tipo: lista
+    campos: [secciones.colecciones.colecciones]
+  - id: productos
+    titulo: "Tus prendas"
+    pregunta: "Cuéntame las prendas que quieres enseñar: nombre, colección, tallas y el precio si quieres. Una por línea."
+    ayuda: "Si lo prefieres, añádelas luego en Contenido."
+    tipo: lista
+    campos: [secciones.productos.productos]
+  - id: sobre
+    titulo: "Tu historia"
+    pregunta: "¿Desde cuándo está abierta la tienda y qué la hace distinta?"
+    tipo: texto
+    campos: [secciones.sobre.titulo, secciones.sobre.texto, secciones.cita.declaracion]
+  - id: ventajas
+    titulo: "Servicios de la tienda"
+    pregunta: "¿Qué ofreces además de vender? Arreglos, asesoría, envíos, apartar prendas…"
+    tipo: texto
+    campos: [secciones.ventajas.titulo, secciones.ventajas.items]
+  - id: tienda
+    titulo: "La tienda"
+    pregunta: "¿Cómo es la tienda y qué la hace agradable de visitar?"
+    ayuda: "Por ejemplo: cerca de qué plaza está, si hay probadores amplios o aparcamiento. El horario se cambia luego en Contenido."
+    tipo: texto
+    campos: [secciones.tienda.titulo, secciones.tienda.texto]
+  - id: preguntas
+    titulo: "Preguntas frecuentes"
+    pregunta: "¿Qué te preguntan más a menudo? Envíos, cambios, tallas, arreglos… Escribe cada pregunta y lo que respondes."
+    ayuda: "Si lo prefieres, añádelas luego en Contenido."
+    tipo: lista
+    campos: [secciones.preguntas.preguntas]
+  - id: fotos
+    titulo: "Tus fotos"
+    pregunta: "Pon una foto de portada y, si quieres, las del lookbook, la tienda y tu historia."
+    ayuda: "Sube las tuyas o elige una del banco. Las que no cambies se quedan como están."
+    tipo: fotos
+    campos: [secciones.hero.imagen, secciones.lookbook.galeria, secciones.sobre.imagen, secciones.tienda.imagen]
+  - id: aspecto
+    titulo: "Colores y logo"
+    pregunta: "Elige los colores de tu web y, si tienes, tu logo."
+    tipo: eleccion
+    campos: [colores.primario, colores.acento, logo]
+  - id: repaso
+    titulo: "Repaso"
+    tipo: repaso

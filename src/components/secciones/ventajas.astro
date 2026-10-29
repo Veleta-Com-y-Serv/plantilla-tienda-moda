@@ -1,0 +1,48 @@
+---
+// Servicios de la tienda: banda clara con titular partido y los servicios en columnas separadas por líneas finas
+// (1 en móvil, 2 en tableta, 4 en escritorio), cada uno con su número en serif enorme, icono, título en
+// mayúsculas espaciadas y texto. `items: [{ titulo, texto, icono }]`. Botón opcional (cta).
+import { seccion } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const items = s ? s.items.filter((i) => i.titulo) : [];
+---
+
+{
+  s && (
+    <section id={Astro.props.id} class="banda-clara py-[var(--ritmo)] md:py-[var(--ritmo-md)]">
+      <div class="contenedor">
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} lado />
+        {items.length > 0 && (
+          <ul class="servicios grid border-t border-[var(--c-texto)] sm:grid-cols-2 lg:grid-cols-4">
+            {items.map((it, i) => (
+              <li class="border-b border-[var(--c-linea)] py-8 sm:px-6 lg:border-b-0 lg:py-10">
+                <div class="flex items-start justify-between gap-4">
+                  <span class="text-[clamp(3.5rem,6vw,5.5rem)] leading-none text-[var(--c-acento)]" style="font-family: var(--fuente-titulos)" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                  <Icono nombre={it.icono || 'check'} tam={26} class="mt-2 shrink-0" />
+                </div>
+                <h3 class="mt-8 text-[.78rem] font-semibold uppercase tracking-[.24em]" style="font-family: var(--fuente-texto)">{it.titulo}</h3>
+                {it.texto && <p class="mt-3 text-[var(--c-suave)]">{it.texto}</p>}
+              </li>
+            ))}
+          </ul>
+        )}
+        {s.cta?.url && <p class="mt-12"><a class="btn" href={s.cta.url}>{s.cta.texto}</a></p>}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  @media (min-width: 640px) {
+    .servicios li:nth-child(odd) { padding-left: 0; }
+    .servicios li:nth-child(even) { border-left: 1px solid var(--c-linea); }
+  }
+  @media (min-width: 1024px) {
+    .servicios li { border-left: 1px solid var(--c-linea); }
+    .servicios li:first-child { border-left: 0; padding-left: 0; }
+    .servicios li:nth-child(odd):not(:first-child) { padding-left: 1.5rem; }
+  }
+</style>

@@ -1,0 +1,51 @@
+---
+// Contacto: banda clara partida. A la izquierda, titular y los datos de site.yaml → contacto en líneas finas
+// (teléfono, WhatsApp, correo, dirección y horario; lo vacío no sale). A la derecha, el formulario de líneas
+// (mailto) con «Prenda de interés» relleno con las prendas de la sección `productos` y la talla.
+import { seccion, site, tel, mapa, whatsapp, buscarSeccion } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+import FormularioContacto from '../ui/FormularioContacto.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const c = site.contacto;
+const productos = (buscarSeccion('productos')?.s.productos ?? []).map((p) => p.nombre).filter(Boolean);
+const datos = [
+  c.telefono && { icono: 'telefono', etiqueta: 'Teléfono', valor: c.telefono, url: tel(c.telefono) },
+  c.whatsapp && { icono: 'whatsapp', etiqueta: 'WhatsApp', valor: c.whatsapp, url: whatsapp(c.whatsapp) },
+  c.email && { icono: 'correo', etiqueta: 'Correo', valor: c.email, url: `mailto:${c.email}` },
+  c.direccion && { icono: 'mapa', etiqueta: 'Tienda', valor: c.direccion, url: mapa(c.direccion) },
+  c.horario && { icono: 'reloj', etiqueta: 'Horario', valor: c.horario, url: '' },
+].filter(Boolean) as { icono: string; etiqueta: string; valor: string; url: string }[];
+const externo = (u = '') => /^https?:/.test(u);
+---
+
+{
+  s && (
+    <section id={Astro.props.id} class="banda-clara py-[var(--ritmo)] md:py-[var(--ritmo-md)]">
+      <div class="contenedor grid gap-12 lg:grid-cols-12 lg:gap-16">
+        <div class="lg:col-span-5">
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+          {datos.length > 0 && (
+            <dl class="border-t border-[var(--c-texto)]">
+              {datos.map((d) => (
+                <div class="grid grid-cols-[2rem_minmax(0,1fr)] gap-3 border-b border-[var(--c-linea)] py-4">
+                  <Icono nombre={d.icono} tam={18} class="mt-1 text-[var(--c-acento)]" />
+                  <div class="min-w-0">
+                    <dt class="text-[.65rem] font-semibold uppercase tracking-[.28em] text-[var(--c-suave)]">{d.etiqueta}</dt>
+                    <dd class="mt-1 break-words text-lg">
+                      {d.url ? <a href={d.url} class="hover:text-[var(--c-acento)]" rel={externo(d.url) ? 'noopener' : undefined} target={externo(d.url) ? '_blank' : undefined}>{d.valor}</a> : d.valor}
+                    </dd>
+                  </div>
+                </div>
+              ))}
+            </dl>
+          )}
+        </div>
+        <div class="-mx-4 bg-[var(--c-papel)] px-4 py-10 sm:mx-0 sm:p-10 lg:col-span-7 lg:p-14">
+          <FormularioContacto boton={s.cta?.texto || 'Enviar mensaje'} productos={productos} />
+        </div>
+      </div>
+    </section>
+  )
+}

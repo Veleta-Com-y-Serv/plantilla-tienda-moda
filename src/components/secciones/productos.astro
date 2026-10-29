@@ -1,0 +1,121 @@
+---
+// Novedades: titular a la izquierda y filtro por colección a la derecha (subrayado cobalto); debajo, rejilla
+// a todo el ancho del contenido (2 columnas en móvil, 3 en tableta, 4 en escritorio o 3 si las prendas van de tres en tres) sin tarjeta:
+// foto vertical 3:4 sobre papel, estado («Nuevo», «Rebajas») en la esquina, colección, nombre en serif, tallas,
+// precio (solo si hay una cifra) y el botón (`boton`, por defecto «Pregunta por WhatsApp»), que abre WhatsApp con
+// el nombre y la referencia de la prenda; sin WhatsApp, lleva al formulario y deja la prenda elegida.
+// Lista propia `productos: [{ nombre, ref, categoria, texto, tallas, precio, estado, imagen }]`.
+// Con `productos: []` se ve el texto y el botón (cta) en una franja, sin rejilla.
+import { seccion, site, buscarSeccion, clave, partes, conPrecio, whatsapp } from '../../data/site';
+import type { Producto } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const lista: Producto[] = s ? s.productos.filter((p) => p.nombre) : [];
+const categorias = [...new Set(lista.map((p) => p.categoria?.trim()).filter(Boolean))] as string[];
+const contacto = buscarSeccion('contacto');
+const formulario = contacto ? `#${contacto.id}` : '';
+const boton = (typeof s?.boton === 'string' && s.boton.trim()) || 'Pregunta por WhatsApp';
+const enlace = (p: Producto) =>
+  whatsapp(site.contacto.whatsapp, `Hola, me interesa «${p.nombre}»${p.ref ? ` (ref. ${p.ref})` : ''}. ¿Lo tenéis en mi talla?`) || formulario;
+const columnas = lista.length % 4 !== 0 && lista.length % 3 === 0 ? "xl:grid-cols-3" : "xl:grid-cols-4";
+const estadoClase = (e = '') => (/^nuev/i.test(e.trim()) ? 'estado--nuevo' : /rebaj|oferta|outlet/i.test(e) ? 'estado--rebajas' : '');
+---
+
+{
+  s && (
+    <section id={Astro.props.id} class="banda-clara py-[var(--ritmo)] md:py-[var(--ritmo-md)]">
+      <div class="contenedor" data-catalogo>
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <Titular class="!mb-0" antetitulo={s.antetitulo} titulo={s.titulo} texto={lista.length ? s.texto : ''} />
+          {categorias.length > 1 && (
+            <div class="filtro lg:justify-end lg:pb-2" role="group" aria-label={s.titulo || s.antetitulo || 'Filtrar'}>
+              <button type="button" data-filtro="" aria-pressed="true">Todo</button>
+              {categorias.map((c) => <button type="button" data-filtro={clave(c)} aria-pressed="false">{c}</button>)}
+            </div>
+          )}
+        </div>
+
+        {lista.length > 0 ? (
+          <ul class:list={["mt-10 grid grid-cols-2 gap-x-3 gap-y-12 sm:gap-x-5 md:mt-14 md:grid-cols-3 md:gap-y-16 xl:gap-x-8", columnas]}>
+            {lista.map((p) => {
+              const tallas = partes(p.tallas);
+              const url = enlace(p);
+              const externo = /^https?:/.test(url);
+              return (
+                <li data-categoria={clave(p.categoria)} class="flex min-w-0">
+                  <article class="flex w-full min-w-0 flex-col">
+                    <div class="relative overflow-hidden bg-[var(--c-papel)]">
+                      <Imagen src={p.imagen || '/placeholders/prenda.svg'} alt={p.nombre} ancho={900} alto={1200} respaldo="/placeholders/prenda.svg" class="aspect-[3/4] w-full object-cover transition-transform duration-700 hover:scale-[1.03]" />
+                      {p.estado && <span class:list={['estado absolute left-0 top-0', estadoClase(p.estado)]}>{p.estado}</span>}
+                    </div>
+                    <div class="flex flex-1 flex-col pt-4">
+                      <div class="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                        {p.categoria && <p class="text-[.62rem] font-semibold uppercase tracking-[.25em] text-[var(--c-suave)]">{p.categoria}</p>}
+                        {p.ref && <p class="text-[.62rem] uppercase tracking-[.15em] text-[var(--c-suave)]">Ref. {p.ref}</p>}
+                      </div>
+                      <h3 class="mt-2 text-[1.3rem] leading-tight sm:text-[1.6rem]">{p.nombre}</h3>
+                      {p.texto && <p class="mt-2 hidden text-sm text-[var(--c-suave)] sm:block">{p.texto}</p>}
+                      {tallas.length > 0 && (
+                        <p class="mt-3 flex flex-wrap gap-1.5" aria-label={`Tallas: ${tallas.join(', ')}`}>
+                          {tallas.map((t) => <span class="border border-[var(--c-linea)] px-1.5 py-0.5 text-[.65rem] font-semibold uppercase tracking-wider">{t}</span>)}
+                        </p>
+                      )}
+                      <div class="mt-auto flex flex-col gap-1 pt-4 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-3">
+                        {conPrecio(p.precio) && <p class="text-lg font-semibold">{p.precio}</p>}
+                        {url && (
+                          <a href={url} data-producto={externo ? undefined : p.nombre} rel={externo ? 'noopener' : undefined} target={externo ? '_blank' : undefined} class="inline-flex min-h-11 items-center gap-2 text-[.66rem] font-semibold uppercase tracking-[.14em] underline decoration-1 underline-offset-[.4em] hover:text-[var(--c-acento)] sm:ml-auto">
+                            <Icono nombre={externo ? 'whatsapp' : 'mensaje'} tam={16} class="shrink-0" />
+                            {boton}
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </article>
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <div class="mt-10 flex flex-col gap-6 border-y border-[var(--c-linea-fuerte)] py-8 sm:flex-row sm:items-center">
+            {s.texto && <p class="flex-1 text-xl">{s.texto}</p>}
+            {s.cta?.url && <a class="btn shrink-0" href={s.cta.url}>{s.cta.texto}</a>}
+          </div>
+        )}
+
+        {lista.length > 0 && s.cta?.url && (
+          <p class="mt-14 border-t border-[var(--c-linea)] pt-8 text-center"><a class="btn" href={s.cta.url}>{s.cta.texto}</a></p>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<script is:inline>
+  (function () {
+    if (window.__catalogoListo) return;
+    window.__catalogoListo = true;
+    function filtrar(bloque, f) {
+      bloque.querySelectorAll('[data-filtro]').forEach(function (o) { o.setAttribute('aria-pressed', String(o.getAttribute('data-filtro') === f)); });
+      bloque.querySelectorAll('[data-categoria]').forEach(function (li) { li.hidden = !!f && li.getAttribute('data-categoria') !== f; });
+    }
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-filtro]');
+      if (b) { filtrar(b.closest('[data-catalogo]'), b.getAttribute('data-filtro')); return; }
+      var ir = e.target.closest('[data-ir-categoria]');
+      if (ir) {
+        var bloque = document.querySelector('[data-catalogo]');
+        var cat = ir.getAttribute('data-ir-categoria');
+        if (bloque && bloque.querySelector('[data-filtro="' + cat + '"]')) filtrar(bloque, cat);
+        return;
+      }
+      var p = e.target.closest('[data-producto]');
+      if (p) {
+        var sel = document.getElementById('f-producto');
+        if (sel) { sel.value = p.getAttribute('data-producto'); sel.dispatchEvent(new Event('change')); }
+      }
+    });
+  })();
+</script>

@@ -1,0 +1,52 @@
+---
+// Lookbook: banda negra con titular partido y, debajo, mosaico de fotos de borde a borde sin margen (`galeria`,
+// lista de rutas). En escritorio, rejilla de 4 columnas: la 1.ª foto de cada grupo de cuatro ocupa 2×2, la 2.ª
+// 2×1 y las otras dos 1×1 (con cuatro fotos queda un bloque cerrado). En móvil, 2 columnas con fotos anchas
+// alternas. Enlace opcional (cta), por ejemplo a Instagram. Sin fotos solo se ve el titular.
+import { seccion } from '../../data/site';
+import { altGaleria } from '../../lib/seo';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const fotos = s ? s.galeria.slice(0, 24) : [];
+const externo = (u = '') => /^https?:/.test(u);
+---
+
+{
+  s && (
+    <section id={Astro.props.id} class="banda-oscura pt-[var(--ritmo)] md:pt-[var(--ritmo-md)]">
+      <div class="contenedor">
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} lado />
+      </div>
+      {fotos.length > 0 && (
+        <ul class="lookbook grid grid-cols-2 lg:grid-cols-4">
+          {fotos.map((f, i) => (
+            <li class="relative overflow-hidden">
+              <Imagen src={f} alt={altGaleria(i)} ancho={1200} alto={1200} respaldo="/placeholders/coleccion.svg" class="absolute inset-0 h-full w-full object-cover transition-transform duration-700 hover:scale-[1.04]" />
+            </li>
+          ))}
+        </ul>
+      )}
+      {s.cta?.url ? (
+        <div class="contenedor py-10 md:py-14">
+          <a class="enlace-flecha" href={s.cta.url} rel={externo(s.cta.url) ? 'noopener' : undefined} target={externo(s.cta.url) ? '_blank' : undefined}>{s.cta.texto}</a>
+        </div>
+      ) : (
+        <div class="pb-[var(--ritmo)]" />
+      )}
+    </section>
+  )
+}
+
+<style>
+  .lookbook { grid-auto-rows: 68vw; grid-auto-flow: dense; }
+  .lookbook li:nth-child(4n + 1), .lookbook li:nth-child(4n + 4) { grid-column: span 2; }
+  @media (min-width: 640px) { .lookbook { grid-auto-rows: 44vw; } }
+  @media (min-width: 1024px) {
+    .lookbook { grid-auto-rows: min(26vw, 30rem); }
+    .lookbook li:nth-child(4n + 4) { grid-column: span 1; }
+    .lookbook li:nth-child(4n + 1) { grid-column: span 2; grid-row: span 2; }
+    .lookbook li:nth-child(4n + 2) { grid-column: span 2; }
+  }
+</style>

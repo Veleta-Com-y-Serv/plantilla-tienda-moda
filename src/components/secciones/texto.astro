@@ -1,0 +1,53 @@
+---
+// Apartado de texto genérico (site.yaml: `tipo: texto`) con el diseño de la plantilla. Con foto, fila partida a
+// sangre (foto al borde izquierdo, texto a la derecha); sin foto, banda clara con el título en serif a la
+// izquierda y los párrafos a la derecha. `items` opcional (lista con icono) y botón (cta).
+import { seccion, parrafos } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const items = s ? s.items.filter((i) => i.titulo) : [];
+---
+
+{
+  s && (
+    <section id={Astro.props.id} class="banda-clara border-t border-[var(--c-linea)]">
+      <div class:list={['grid', s.imagen && 'lg:grid-cols-2']}>
+        {s.imagen && (
+          <div class="relative aspect-[4/3] lg:aspect-auto lg:min-h-[70svh]">
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1200} alto={900} respaldo="/placeholders/foto.svg" class="absolute inset-0 h-full w-full object-cover" />
+          </div>
+        )}
+        <div class:list={['py-[var(--ritmo)] md:py-[var(--ritmo-md)]', s.imagen ? 'px-4 md:px-12 xl:px-24' : 'contenedor']}>
+          <div class:list={['w-full', !s.imagen && 'grid gap-10 lg:grid-cols-12']}>
+            <div class:list={[!s.imagen && 'lg:col-span-6']}>
+              {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+              {s.titulo && <h2 class="titulo-seccion titulo-medio">{s.titulo}</h2>}
+            </div>
+            <div class:list={['max-w-[40rem]', s.imagen ? 'mt-8' : 'lg:col-span-5 lg:col-start-8']}>
+              <div class="space-y-5 text-[1.05rem] text-[var(--c-suave)]">
+                {parrafos(s.texto).map((p) => <p>{p}</p>)}
+              </div>
+              {items.length > 0 && (
+                <ul class="mt-8 border-t border-[var(--c-texto)]">
+                  {items.map((it) => (
+                    <li class="flex gap-4 border-b border-[var(--c-linea)] py-4">
+                      <Icono nombre={it.icono || 'check'} tam={20} class="mt-0.5 shrink-0 text-[var(--c-acento)]" />
+                      <div>
+                        <p class="text-[.75rem] font-semibold uppercase tracking-[.2em]">{it.titulo}</p>
+                        {it.texto && <p class="mt-1 text-sm text-[var(--c-suave)]">{it.texto}</p>}
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {s.cta?.url && <a class="btn mt-8" href={s.cta.url}>{s.cta.texto}</a>}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

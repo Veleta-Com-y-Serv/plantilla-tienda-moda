@@ -1,0 +1,126 @@
+/* Tienda de moda — concepto «revista de temporada»: bandas a sangre en blanco, negro tinta y azul cobalto,
+   serif fina enorme (Didot/Bodoni del sistema) para los títulos, sans neutra para el texto, antetítulos en
+   mayúsculas muy espaciadas con una línea de color, fotos verticales de borde a borde y esquinas rectas.
+   Colores: --c-primario (bandas oscuras y botones), --c-acento (cobalto), --c-fondo (blanco), --c-texto (tinta).
+   Todo lo demás se deriva con color-mix: el diseño aguanta que el cliente cambie los cuatro. */
+@import "tailwindcss";
+@import "./comun.css";
+@config "../../tailwind.config.mjs";
+
+:root {
+  --fuente-texto: "Helvetica Neue", Helvetica, "Segoe UI", Arial, system-ui, -apple-system, sans-serif;
+  --fuente-titulos: Didot, "Bodoni 72", "Bodoni MT", "Bodoni Moda", "Big Caslon", "Libre Bodoni", "Times New Roman", Times, serif;
+  --radio: 0;
+  --ritmo: 4.5rem;
+  --ritmo-md: 8rem;
+  --ancho: 96rem;
+  --alto-cabecera: 4rem;
+  /* Derivados de la paleta */
+  --c-papel: color-mix(in srgb, var(--c-texto) 5%, var(--c-fondo));
+  --c-linea: color-mix(in srgb, var(--c-texto) 16%, transparent);
+  --c-linea-fuerte: color-mix(in srgb, var(--c-texto) 42%, transparent);
+  --c-suave: color-mix(in srgb, var(--c-texto) 70%, var(--c-fondo));
+  --c-oscuro: color-mix(in srgb, var(--c-primario) 92%, #000);
+  --c-sobre-oscuro: color-mix(in srgb, var(--c-fondo) 92%, #fff);
+  --c-sobre-acento: #fff;   /* texto sobre el cobalto: si el cliente pone un acento claro, cámbialo por oscuro */
+  --c-acento-claro: color-mix(in srgb, var(--c-acento) 55%, #fff);
+}
+@media (min-width: 900px) { :root { --alto-cabecera: 5rem; } }
+
+@layer base {
+  html { scroll-padding-top: calc(var(--alto-cabecera) + .5rem); }
+  body { font-family: var(--fuente-texto); font-size: 1rem; line-height: 1.6; background: var(--c-fondo); color: var(--c-texto); }
+  h1, h2, h3 { font-family: var(--fuente-titulos); font-weight: 400; letter-spacing: -0.02em; line-height: 1.02; }
+}
+
+@layer components {
+  /* Titulares */
+  .antetitulo { display: inline-flex; align-items: center; gap: .9rem; font-family: var(--fuente-texto); font-size: .7rem; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; line-height: 1.4; }
+  .antetitulo::before { content: ""; width: 2.5rem; height: 1px; background: var(--c-acento); flex: none; }
+  .titular { margin-bottom: 2.5rem; }
+  @media (min-width: 768px) { .titular { margin-bottom: 4rem; } }
+  .titular--centro { margin-inline: auto; text-align: center; }
+  .titulo-seccion { margin-top: 1rem; font-size: clamp(2.4rem, 6.2vw, 5.75rem); max-width: 16ch; }
+  .titulo-medio { font-size: clamp(2rem, 4.4vw, 3.75rem); }
+  .titular-texto { margin-top: 1.25rem; max-width: 46ch; color: var(--c-suave); font-size: 1.05rem; }
+  .cursiva { font-style: italic; }
+
+  /* Bandas */
+  .banda-clara { background: var(--c-fondo); color: var(--c-texto); }
+  .banda-papel { background: var(--c-papel); color: var(--c-texto); }
+  .banda-oscura { background: var(--c-oscuro); color: var(--c-sobre-oscuro); }
+  .banda-acento { background: var(--c-acento); color: var(--c-sobre-acento); }
+  .banda-oscura .antetitulo::before { background: var(--c-acento-claro); }
+  .banda-acento .antetitulo::before { background: currentColor; }
+  .banda-oscura .titular-texto, .banda-acento .titular-texto { color: color-mix(in srgb, currentColor 78%, transparent); }
+
+  /* Botones: rectángulos negros con mayúsculas espaciadas; versión clara para fondos oscuros o fotos */
+  .btn, .btn-sec { min-height: 3rem; padding: .85rem 1.8rem; border-radius: 0; font-size: .72rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
+  .btn { background: var(--c-primario); color: var(--c-sobre-oscuro); border: 1px solid var(--c-primario); }
+  .btn:hover { background: transparent; color: var(--c-primario); }
+  .btn--claro { background: var(--c-fondo); color: var(--c-primario); border-color: var(--c-fondo); }
+  .btn--claro:hover { background: transparent; color: var(--c-fondo); }
+  .btn-sec { background: transparent; color: inherit; border: 1px solid currentColor; }
+  .btn-sec:hover { background: color-mix(in srgb, currentColor 12%, transparent); }
+  .enlace-flecha { display: inline-flex; align-items: center; gap: .6rem; min-height: 2.75rem; font-size: .72rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .45em; }
+  .enlace-flecha:hover { text-decoration-thickness: 2px; }
+
+  /* Cabecera fija a todo el ancho: transparente sobre la portada con foto, blanca al bajar */
+  .cabecera--moda { position: fixed; inset: 0 0 auto 0; z-index: 50; background: var(--c-fondo); color: var(--c-texto); border-bottom: 1px solid var(--c-linea); transition: background-color .25s ease, color .25s ease, border-color .25s ease; }
+  .cabecera--moda .cabecera-fila { min-height: var(--alto-cabecera); gap: .75rem; }
+  .cabecera--moda.sobre-hero:not(.solida):not(:has(details[open])) { background: transparent; color: #fff; border-bottom-color: rgb(255 255 255 / .28); }
+  .cabecera--moda.sobre-hero:not(.solida):not(:has(details[open])) .cabecera-cta { background: #fff; color: #111; border-color: #fff; }
+  .cabecera--moda.solida { box-shadow: 0 1px 0 var(--c-linea); }
+  .cabecera--moda .marca-nombre { font-family: var(--fuente-titulos); font-size: 1.15rem; letter-spacing: .26em; text-transform: uppercase; }
+  .cabecera--moda .marca-logo { height: 2.25rem; }
+  .cabecera--moda .cabecera-nav { gap: 1.6rem; }
+  .cabecera--moda .cabecera-nav a { font-size: .7rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; padding-block: .75rem; background: linear-gradient(currentColor, currentColor) 0 calc(100% - .45rem) / 0 1px no-repeat; transition: background-size .25s ease; }
+  .cabecera--moda .cabecera-nav a:hover { background-size: 100% 1px; }
+  .cabecera--moda .cabecera-cta { min-height: 2.75rem; padding: .6rem 1.2rem; justify-self: end; }
+  .cabecera--moda .menu-movil summary { min-height: 2.75rem; padding-inline: .25rem; font-size: .7rem; letter-spacing: .22em; text-transform: uppercase; }
+  .cabecera--moda .menu-movil-panel { padding: .5rem 1rem 1.5rem; box-shadow: 0 18px 30px rgb(0 0 0 / .12); border-top: 1px solid var(--c-linea); }
+  .cabecera--moda .menu-movil-panel a:not(.btn) { font-family: var(--fuente-titulos); font-size: 1.75rem; padding: .7rem 0; border-color: var(--c-linea); }
+  .cabecera-hueco { height: var(--alto-cabecera); }
+  @media (min-width: 900px) {
+    .cabecera--moda .cabecera-fila { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); }
+    .cabecera--moda .cabecera-nav { grid-column: 1; grid-row: 1; flex-wrap: wrap; column-gap: 1.4rem; row-gap: 0; }
+    .cabecera--moda .marca { grid-column: 2; grid-row: 1; margin: 0; justify-self: center; }
+    .cabecera--moda .cabecera-cta { grid-column: 3; grid-row: 1; }
+    .cabecera--moda .marca-nombre { font-size: 1.45rem; }
+  }
+
+  /* Pie oscuro con columnas y firma enorme */
+  .pie--moda { background: var(--c-oscuro); color: var(--c-sobre-oscuro); padding-top: 5rem; }
+  @media (min-width: 768px) { .pie--moda .pie-rejilla { grid-template-columns: 1.6fr 1fr 1fr 1.4fr; gap: 3rem; } }
+  .pie--moda .pie-nombre { font-family: var(--fuente-titulos); font-weight: 400; font-size: 1.6rem; letter-spacing: .2em; text-transform: uppercase; }
+  .pie--moda .pie-eslogan { opacity: .7; }
+  .pie--moda .pie-titulo { font-size: .68rem; letter-spacing: .3em; opacity: .6; font-weight: 600; }
+  .pie--moda .pie-lista a { opacity: .9; }
+  .pie--moda .pie-redes a { display: grid; place-items: center; width: 2.75rem; height: 2.75rem; border: 1px solid color-mix(in srgb, currentColor 30%, transparent); }
+  .pie--moda .pie-redes a:hover { background: var(--c-acento); border-color: var(--c-acento); color: var(--c-sobre-acento); }
+  .pie--moda .pie-legal { margin-top: 2rem; padding-bottom: 5.5rem; }
+  @media (min-width: 768px) { .pie--moda .pie-legal { padding-bottom: 1.5rem; padding-right: 5rem; } }
+  .pie-firma { font-family: var(--fuente-titulos); font-size: clamp(3.5rem, 17vw, 17rem); line-height: .82; letter-spacing: -0.03em; margin-top: 4rem; overflow-wrap: anywhere; color: color-mix(in srgb, currentColor 92%, transparent); }
+
+  /* Botón flotante de WhatsApp */
+  .wa-flotante { position: fixed; right: 1rem; bottom: 1rem; z-index: 45; display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border-radius: 999px; background: var(--c-acento); color: var(--c-sobre-acento); box-shadow: 0 10px 24px rgb(0 0 0 / .22); }
+  .wa-flotante:hover { transform: translateY(-2px); }
+
+  /* Etiquetas de estado y filtro */
+  .estado { display: inline-block; padding: .35rem .6rem; font-size: .62rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; background: var(--c-fondo); color: var(--c-texto); }
+  .estado--rebajas { background: var(--c-acento); color: var(--c-sobre-acento); }
+  .estado--nuevo { background: var(--c-primario); color: var(--c-sobre-oscuro); }
+  .filtro { display: flex; flex-wrap: wrap; gap: .25rem 1.5rem; }
+  .filtro button { font: inherit; font-size: .72rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; min-height: 2.75rem; padding: 0; cursor: pointer; color: var(--c-suave); background: none; border: 0; border-bottom: 1px solid transparent; }
+  .filtro button:hover { color: var(--c-texto); }
+  .filtro button[aria-pressed="true"] { color: var(--c-texto); border-bottom-color: var(--c-acento); }
+
+  /* Formulario de líneas finas */
+  .formulario { gap: 1.5rem; }
+  .formulario .campo label { font-size: .68rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; }
+  .formulario .campo input, .formulario .campo textarea, .formulario .campo select { width: 100%; font: inherit; color: inherit; background: transparent; padding: .75rem 0; border: 0; border-bottom: 1px solid var(--c-linea-fuerte); border-radius: 0; }
+  .formulario .campo select option { color: #161616; }
+  .formulario .campo input:focus, .formulario .campo textarea:focus, .formulario .campo select:focus { outline: none; border-bottom: 2px solid var(--c-acento); }
+  .formulario-doble { display: grid; gap: 1.5rem; }
+  @media (min-width: 560px) { .formulario-doble { grid-template-columns: 1fr 1fr; } }
+}

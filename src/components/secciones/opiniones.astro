@@ -1,0 +1,36 @@
+---
+// Opiniones: banda de papel con titular y las opiniones en columnas (1 en móvil, 3 en escritorio) sin tarjetas,
+// separadas por una línea fina arriba: frase en serif grande, autor en mayúsculas y su origen (`nota`, p. ej.
+// «Google»). `testimonios: [{ texto, autor, nota }]`. Con la lista vacía no se pinta (no se inventan opiniones).
+import { seccion } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const lista = s ? s.testimonios.filter((t) => t.texto) : [];
+---
+
+{
+  s && lista.length > 0 && (
+    <section id={Astro.props.id} class="banda-papel py-[var(--ritmo)] md:py-[var(--ritmo-md)]">
+      <div class="contenedor">
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} lado />
+        <ul class="grid gap-12 md:grid-cols-2 md:gap-10 lg:grid-cols-3">
+          {lista.map((t) => (
+            <li class="border-t border-[var(--c-texto)] pt-8">
+              <figure>
+                <span class="block text-6xl leading-[.6] text-[var(--c-acento)]" style="font-family: var(--fuente-titulos)" aria-hidden="true">“</span>
+                <blockquote class="mt-4 text-[clamp(1.35rem,2vw,1.75rem)] leading-snug" style="font-family: var(--fuente-titulos)">{t.texto}</blockquote>
+                {(t.autor || t.nota) && (
+                  <figcaption class="mt-6 text-[.7rem] font-semibold uppercase tracking-[.26em]">
+                    {t.autor}
+                    {t.nota && <span class="ml-2 font-normal text-[var(--c-suave)]">· {t.nota}</span>}
+                  </figcaption>
+                )}
+              </figure>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}

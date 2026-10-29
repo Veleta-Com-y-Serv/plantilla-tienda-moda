@@ -1,0 +1,35 @@
+---
+// Llamada a la acción: banda cobalto a todo el ancho con antetítulo, título en serif enorme y, a la derecha en
+// escritorio, el texto y dos botones. El principal (cta) va por defecto al WhatsApp de site.yaml → contacto si su
+// url está vacía (o al formulario si no hay WhatsApp); el secundario (cta_secundario) solo si tiene url.
+import { seccion, site, whatsapp, buscarSeccion, destino } from '../../data/site';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const contacto = buscarSeccion('contacto');
+const respaldo = whatsapp(site.contacto.whatsapp, `Hola, os escribo desde la web de ${site.nombre}.`) || (contacto ? `#${contacto.id}` : '');
+const principal = s?.cta?.texto ? { texto: s.cta.texto, url: destino(s.cta.url, respaldo) } : null;
+const secundario = s?.cta_secundario?.url ? s.cta_secundario : null;
+const externo = (u = '') => /^https?:/.test(u);
+---
+
+{
+  s && (
+    <section id={Astro.props.id} class="banda-acento py-[var(--ritmo)] md:py-[var(--ritmo-md)]">
+      <div class="contenedor grid gap-10 lg:grid-cols-12 lg:items-end">
+        <div class="lg:col-span-8">
+          {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+          {s.titulo && <h2 class="mt-5 max-w-[18ch] text-[clamp(2.5rem,6.4vw,6rem)] leading-[.98]">{s.titulo}</h2>}
+        </div>
+        <div class="lg:col-span-4">
+          {s.texto && <p class="max-w-[40ch] text-lg opacity-90">{s.texto}</p>}
+          {(principal?.url || secundario) && (
+            <div class="mt-8 flex flex-wrap gap-3">
+              {principal?.url && <a class="btn btn--claro" href={principal.url} rel={externo(principal.url) ? 'noopener' : undefined} target={externo(principal.url) ? '_blank' : undefined}>{principal.texto}</a>}
+              {secundario && <a class="btn-sec" href={secundario.url}>{secundario.texto}</a>}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}

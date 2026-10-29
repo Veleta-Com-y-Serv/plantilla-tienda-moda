@@ -1,0 +1,42 @@
+---
+// La casa: fila partida 50/50 a sangre. La foto toca el borde izquierdo de la ventana y ocupa toda la altura de la
+// banda; a la derecha, antetítulo, título en serif, párrafos (texto con líneas en blanco) y un enlace (cta).
+// Sin foto, el texto ocupa la banda con el título a la izquierda y los párrafos a la derecha.
+import { seccion, parrafos } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+---
+
+{
+  s && (
+    <section id={Astro.props.id} class="banda-papel">
+      <div class:list={['grid', s.imagen && 'lg:grid-cols-2']}>
+        {s.imagen && (
+          <div class="relative aspect-[4/5] sm:aspect-[16/11] lg:aspect-auto lg:min-h-[88svh]">
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1200} alto={1500} respaldo="/placeholders/foto.svg" class="absolute inset-0 h-full w-full object-cover" />
+          </div>
+        )}
+        <div class:list={['flex items-center py-[var(--ritmo)] md:py-[var(--ritmo-md)]', s.imagen ? 'px-4 md:px-12 xl:px-24' : 'contenedor']}>
+          <div class:list={['w-full', !s.imagen && 'grid gap-10 lg:grid-cols-12']}>
+            <div class:list={[!s.imagen && 'lg:col-span-6']}>
+              {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+              {s.titulo && <h2 class="titulo-seccion titulo-medio">{s.titulo}</h2>}
+            </div>
+            <div class:list={['max-w-[40rem]', s.imagen ? 'mt-8' : 'lg:col-span-5 lg:col-start-8']}>
+              <div class="space-y-5 text-[1.05rem] text-[var(--c-suave)]">
+                {parrafos(s.texto).map((p, i) => <p class:list={{ 'primera-letra': i === 0 }}>{p}</p>)}
+              </div>
+              {s.cta?.url && <a class="enlace-flecha mt-8" href={s.cta.url}>{s.cta.texto}</a>}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .primera-letra::first-letter { float: left; font-family: var(--fuente-titulos); font-size: 4.6em; line-height: .8; padding: .08em .12em 0 0; color: var(--c-texto); }
+</style>
