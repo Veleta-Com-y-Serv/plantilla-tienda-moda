@@ -1,18 +1,82 @@
 [
-  { "fichero": "fotos/hero.jpg", "aspecto": "16:9", "prompt": "Fotografía editorial de moda: vestido largo de lino color arena colgado de una percha de madera en una pared encalada blanca de una casa antigua mediterránea, luz de tarde muy cálida entrando de lado con sombras largas de una persiana, suelo de baldosa hidráulica, mucho espacio libre a la izquierda, sin personas, sin texto ni logotipos" },
-  { "fichero": "fotos/coleccion-mujer.jpg", "aspecto": "3:4", "prompt": "Fotografía editorial vertical: modelo de espaldas caminando por una calle estrecha de piedra del casco antiguo de Palma, con vestido camisero de lino blanco y bolso de rafia, encuadre desde la cintura, rostro fuera de plano, luz dorada de tarde, sin texto ni logotipos" },
-  { "fichero": "fotos/coleccion-hombre.jpg", "aspecto": "3:4", "prompt": "Fotografía editorial vertical: torso de hombre sin rostro visible con camisa de lino azul claro remangada y pantalón de algodón crudo, apoyado en una pared de marés color miel, sombras de hojas de palmera, luz cálida, sin texto ni logotipos" },
-  { "fichero": "fotos/coleccion-complementos.jpg", "aspecto": "3:4", "prompt": "Bodegón vertical de complementos de moda sobre una silla de enea: bolso de rafia con asas de piel, alpargatas de yute y un pañuelo de seda azul cobalto doblado, pared blanca encalada detrás, luz natural lateral suave, sin texto ni logotipos" },
-  { "fichero": "fotos/marca.jpg", "aspecto": "3:4", "prompt": "Interior de una pequeña tienda de ropa en un edificio antiguo: burro de madera con camisas de lino en tonos blanco, arena y azul, techo con vigas de madera, paredes encaladas, gran espejo de pie con marco fino, luz natural de mañana entrando por un balcón, sin personas, sin texto ni logotipos" },
-  { "fichero": "fotos/producto-1.jpg", "aspecto": "3:4", "prompt": "Fotografía de producto de moda: vestido camisero de lino lavado color arena con cinturón del mismo tejido, colgado de una percha de madera clara sobre fondo gris piedra liso, luz de estudio suave, encuadre vertical centrado, sin personas, sin texto ni etiquetas" },
-  { "fichero": "fotos/producto-2.jpg", "aspecto": "3:4", "prompt": "Fotografía de producto de moda: pantalón ancho de crepé negro de tiro alto con pinzas, doblado con cuidado y colocado en plano sobre una superficie de lino crudo, vista cenital, luz natural suave, encuadre vertical, sin texto ni etiquetas" },
-  { "fichero": "fotos/producto-3.jpg", "aspecto": "3:4", "prompt": "Fotografía de producto de moda: jersey de punto grueso de algodón color crema con cuello redondo, doblado sobre una banqueta de madera, fondo blanco roto, luz natural lateral, encuadre vertical, sin personas, sin texto ni etiquetas" },
-  { "fichero": "fotos/producto-4.jpg", "aspecto": "3:4", "prompt": "Fotografía de producto de moda: camisa de hombre de lino lavado azul claro con botones de nácar, colgada de una percha de madera sobre una pared encalada blanca, luz de mañana suave, encuadre vertical, sin personas, sin texto ni etiquetas" },
-  { "fichero": "fotos/producto-5.jpg", "aspecto": "3:4", "prompt": "Fotografía de producto de moda: chaqueta de hombre de pana fina color tabaco con forro de algodón, colocada en un maniquí de sastre sin cabeza, fondo gris cálido liso, luz de estudio suave, encuadre vertical, sin texto ni etiquetas" },
-  { "fichero": "fotos/producto-6.jpg", "aspecto": "3:4", "prompt": "Fotografía de producto de moda: bolso de rafia natural tejido a mano con asas de piel marrón, apoyado sobre un taburete de madera, fondo blanco roto liso, sombra suave, luz natural, encuadre vertical, sin texto ni logotipos" },
-  { "fichero": "fotos/look-1.jpg", "aspecto": "3:4", "prompt": "Fotografía editorial de moda vertical: modelo de espaldas con abrigo largo de lana color camel caminando por un paseo junto al mar al atardecer, rostro no visible, barcas de pesca desenfocadas al fondo, luz dorada, grano fino de película, sin texto ni logotipos" },
-  { "fichero": "fotos/look-2.jpg", "aspecto": "4:3", "prompt": "Fotografía editorial de moda horizontal: detalle de manos con anillos finos sujetando el borde de una chaqueta de punto azul cobalto sobre una falda de lino blanca, sentada en un escalón de piedra, encuadre cerrado sin rostro, luz cálida lateral, sin texto ni logotipos" },
-  { "fichero": "fotos/look-3.jpg", "aspecto": "3:4", "prompt": "Fotografía editorial de moda vertical: modelo apoyada en una puerta de madera verde antigua de una calle de Palma, con pantalón ancho negro y camisa blanca, encuadre de hombros hacia abajo sin rostro, sombras marcadas, luz de mediodía, sin texto ni logotipos" },
-  { "fichero": "fotos/look-4.jpg", "aspecto": "3:4", "prompt": "Fotografía editorial de moda vertical: pies con alpargatas de yute y bajo de un pantalón de lino crudo caminando sobre baldosas hidráulicas antiguas, sombra de una celosía, luz cálida de tarde, sin rostro ni personas reconocibles, sin texto ni logotipos" },
-  { "fichero": "fotos/tienda.jpg", "aspecto": "4:3", "prompt": "Escaparate y entrada de una pequeña tienda de ropa en una calle peatonal de piedra del casco antiguo de una ciudad mediterránea, fachada de marés color miel, puerta de madera abierta, prendas de lino en el interior, macetas a los lados, luz de tarde, sin personas, sin rótulos ni texto legible, sin logotipos" }
+ {
+  "fichero": "fotos/hero.jpg",
+  "aspecto": "16:9",
+  "prompt": "Fotografía editorial de moda: vestido largo de lino color arena colgado de una percha de madera en una pared encalada blanca de una casa antigua mediterránea, luz de tarde muy cálida entrando de lado con sombras largas de una persiana, suelo de baldosa hidráulica, mucho espacio libre a la izquierda, sin personas, sin texto ni logotipos"
+ },
+ {
+  "fichero": "fotos/coleccion-mujer.jpg",
+  "aspecto": "3:4",
+  "prompt": "Fotografía editorial vertical: modelo de espaldas caminando por una calle estrecha de piedra del casco antiguo de Palma, con vestido camisero de lino blanco y bolso de rafia, encuadre desde la cintura, rostro fuera de plano, luz dorada de tarde, sin texto ni logotipos"
+ },
+ {
+  "fichero": "fotos/coleccion-hombre.jpg",
+  "aspecto": "3:4",
+  "prompt": "Fotografía editorial vertical recortada por debajo del cuello: solo se ve el torso con una camisa de lino azul claro remangada y pantalón de algodón crudo, de pie junto a una pared de marés color miel, sombras de hojas de palmera, luz cálida, el encuadre empieza en la clavícula, sin cabeza ni cara en la imagen, sin texto ni logotipos"
+ },
+ {
+  "fichero": "fotos/coleccion-complementos.jpg",
+  "aspecto": "3:4",
+  "prompt": "Bodegón vertical de complementos de moda sobre una silla de enea: bolso de rafia con asas de piel, alpargatas de yute y un pañuelo de seda azul cobalto doblado, pared blanca encalada detrás, luz natural lateral suave, sin texto ni logotipos"
+ },
+ {
+  "fichero": "fotos/marca.jpg",
+  "aspecto": "3:4",
+  "prompt": "Interior de una pequeña tienda de ropa en un edificio antiguo: burro de madera con camisas de lino en tonos blanco, arena y azul, techo con vigas de madera, paredes encaladas, gran espejo de pie con marco fino, luz natural de mañana entrando por un balcón, sin personas, sin texto ni logotipos"
+ },
+ {
+  "fichero": "fotos/producto-1.jpg",
+  "aspecto": "3:4",
+  "prompt": "Fotografía de producto de moda: vestido camisero de lino lavado color arena con cinturón del mismo tejido, colgado de una percha de madera clara sobre fondo gris piedra liso, cuello liso sin etiqueta ni marca visible, luz de estudio suave, encuadre vertical centrado, sin personas, sin texto ni letras"
+ },
+ {
+  "fichero": "fotos/producto-2.jpg",
+  "aspecto": "3:4",
+  "prompt": "Fotografía de producto de moda: pantalón ancho de crepé negro de tiro alto con pinzas, doblado con cuidado y colocado en plano sobre una superficie de lino crudo, vista cenital, luz natural suave, encuadre vertical, sin texto ni etiquetas"
+ },
+ {
+  "fichero": "fotos/producto-3.jpg",
+  "aspecto": "3:4",
+  "prompt": "Fotografía de producto de moda: jersey de punto grueso de algodón color crema con cuello redondo, doblado sobre una banqueta de madera, fondo blanco roto, luz natural lateral, encuadre vertical, sin personas, sin texto ni etiquetas"
+ },
+ {
+  "fichero": "fotos/producto-4.jpg",
+  "aspecto": "3:4",
+  "prompt": "Fotografía de producto de moda: camisa de hombre de lino lavado azul claro con botones de nácar y cuello liso sin etiqueta visible, colgada de una percha de madera sobre una pared encalada blanca, luz de mañana suave, encuadre vertical, sin personas, sin etiquetas, sin texto ni letras"
+ },
+ {
+  "fichero": "fotos/producto-5.jpg",
+  "aspecto": "3:4",
+  "prompt": "Fotografía de producto de moda: chaqueta de hombre de pana fina color tabaco con forro de algodón, colocada en un maniquí de sastre sin cabeza, fondo gris cálido liso, luz de estudio suave, encuadre vertical, sin texto ni etiquetas"
+ },
+ {
+  "fichero": "fotos/producto-6.jpg",
+  "aspecto": "3:4",
+  "prompt": "Fotografía de producto de moda: bolso de rafia natural tejido a mano con asas de piel marrón, apoyado sobre un taburete de madera, fondo blanco roto liso, sombra suave, luz natural, encuadre vertical, sin texto ni logotipos"
+ },
+ {
+  "fichero": "fotos/look-1.jpg",
+  "aspecto": "3:4",
+  "prompt": "Fotografía editorial de moda vertical: modelo de espaldas con abrigo largo de lana color camel caminando por un paseo junto al mar al atardecer, rostro no visible, barcas de pesca desenfocadas al fondo, luz dorada, grano fino de película, sin texto ni logotipos"
+ },
+ {
+  "fichero": "fotos/look-2.jpg",
+  "aspecto": "4:3",
+  "prompt": "Fotografía editorial de moda horizontal: detalle de manos con anillos finos sujetando el borde de una chaqueta de punto azul cobalto sobre una falda de lino blanca, sentada en un escalón de piedra, encuadre cerrado sin rostro, luz cálida lateral, sin texto ni logotipos"
+ },
+ {
+  "fichero": "fotos/look-3.jpg",
+  "aspecto": "3:4",
+  "prompt": "Fotografía editorial de moda vertical: mujer vista completamente de espaldas apoyada en una puerta de madera verde antigua de una calle de Palma, con pantalón ancho negro y camisa blanca de seda, el pelo recogido, cabeza girada hacia la puerta sin que se vea la cara, sombras marcadas, luz de mediodía, sin texto ni logotipos"
+ },
+ {
+  "fichero": "fotos/look-4.jpg",
+  "aspecto": "3:4",
+  "prompt": "Fotografía editorial de moda vertical: pies con alpargatas de yute y bajo de un pantalón de lino crudo caminando sobre baldosas hidráulicas antiguas, sombra de una celosía, luz cálida de tarde, sin rostro ni personas reconocibles, sin texto ni logotipos"
+ },
+ {
+  "fichero": "fotos/tienda.jpg",
+  "aspecto": "4:3",
+  "prompt": "Escaparate y entrada de una pequeña tienda de ropa en una calle peatonal de piedra del casco antiguo de una ciudad mediterránea, fachada de marés color miel, puerta de madera abierta, prendas de lino en el interior, macetas a los lados, luz de tarde, sin personas, sin rótulos ni texto legible, sin logotipos"
+ }
 ]
