@@ -59,3 +59,6 @@ rediseñada entera (tanda «ancho completo», fila 8 del brief). Este fichero se
 - [x] `fotos.json` (16) y placeholders.
 - [x] `README.md`, `CLAUDE.md`, `aviso-legal.astro` y `404.astro` con el diseño.
 - [ ] Fotos y previews (`preview/card.jpg`, `preview/full.jpg`): las genera el paso de fotos.
+
+## Páginas propias (fichas)
+Con la piel de la portada («página de revista»): banda papel con migas en mayúsculas y hero partido (foto vertical 3:4 a sangre a la izquierda; a la derecha colección, nombre en serif enorme, tallas en casillas, precio y botón de WhatsApp), banda blanca con el detalle (letra capital cobalto) y tabla de líneas finas, mosaico de fotos a sangre, franja cobalto de contacto y otras prendas en banda negra.

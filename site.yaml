@@ -72,12 +72,91 @@ secciones:
     boton: Pregunta por WhatsApp
     cta: { texto: "¿Buscas otra prenda? Escríbenos", url: "/#contacto" }
     productos:
-      - { nombre: Vestido camisero de lino, ref: SL-2611, categoria: Mujer, texto: "Lino lavado con cinturón del mismo tejido. Fresco y sin planchar.", tallas: "XS; S; M; L; XL", precio: "89 €", estado: Nuevo, imagen: /fotos/producto-1.jpg }
-      - { nombre: Pantalón ancho de crepé, ref: SL-2604, categoria: Mujer, texto: "Tiro alto, pinzas y bolsillos laterales. Cae muy bien.", tallas: "S; M; L", precio: "69 €", estado: "", imagen: /fotos/producto-2.jpg }
-      - { nombre: Jersey de punto de algodón, ref: SL-2589, categoria: Mujer, texto: "Punto grueso de algodón orgánico, cuello redondo.", tallas: "S; M; L", precio: "45 €", estado: Rebajas, imagen: /fotos/producto-3.jpg }
-      - { nombre: Camisa de lino lavado, ref: SL-2617, categoria: Hombre, texto: "Cuello italiano y botones de nácar. En arena, blanco y azul.", tallas: "S; M; L; XL; XXL", precio: "65 €", estado: Nuevo, imagen: /fotos/producto-4.jpg }
-      - { nombre: Chaqueta de pana fina, ref: SL-2560, categoria: Hombre, texto: "Forro de algodón y tres bolsillos. Para las tardes de otoño.", tallas: "M; L; XL", precio: "129 €", estado: "", imagen: /fotos/producto-5.jpg }
-      - { nombre: Bolso de rafia y piel, ref: SL-2598, categoria: Complementos, texto: "Tejido a mano en Mallorca, asas de piel curtida.", tallas: Talla única, precio: "95 €", estado: Nuevo, imagen: /fotos/producto-6.jpg }
+      - nombre: Vestido camisero de lino
+        ref: SL-2611
+        categoria: Mujer
+        texto: "Lino lavado con cinturón del mismo tejido. Fresco y sin planchar."
+        tallas: "XS; S; M; L; XL"
+        precio: "89 €"
+        estado: Nuevo
+        imagen: /fotos/producto-1.jpg
+        imagenes: "/fotos/look-1.jpg; /fotos/look-2.jpg"
+        detalle: |
+          Un vestido pensado para los días largos de verano en la isla. El lino lavado se arruga con gracia y se ablanda con cada lavado, así que no hace falta plancharlo para que luzca bien. El cinturón del mismo tejido marca la cintura sin apretar y se puede llevar suelto si prefieres una caída más relajada.
+
+          Lo cosemos en un taller pequeño que conocemos desde hace años, con botones cubiertos y costuras francesas por dentro. Funciona igual de bien con sandalias de paseo que con un calzado más arreglado para una cena en el puerto.
+
+          Si dudas con la talla, ven a probártelo: los probadores son amplios y te arreglamos el bajo en el día sin coste. También puedes escribirnos por WhatsApp y te lo apartamos.
+      - nombre: Pantalón ancho de crepé
+        ref: SL-2604
+        categoria: Mujer
+        texto: "Tiro alto, pinzas y bolsillos laterales. Cae muy bien."
+        tallas: "S; M; L"
+        precio: "69 €"
+        estado: ""
+        imagen: /fotos/producto-2.jpg
+        detalle: |
+          El pantalón que más repetimos cada temporada. El crepé cae con peso, no se pega y casi no se arruga en la maleta, de modo que sirve tanto para la oficina como para una comida larga. El tiro alto estiliza y las pinzas dan holgura justa en la cadera sin añadir volumen.
+
+          Lleva bolsillos laterales de verdad, cremallera discreta y un forro ligero en la parte delantera para que el tejido no se transparente. Lo patronan en un taller de Valencia con el que trabajamos desde la apertura.
+
+          Combina con una camisa de lino por dentro, con un jersey fino de punto o con una camiseta básica. Si el largo no te convence, lo acortamos en el día. Pregúntanos por WhatsApp si lo tenemos en tu talla.
+      - nombre: Jersey de punto de algodón
+        ref: SL-2589
+        categoria: Mujer
+        texto: "Punto grueso de algodón orgánico, cuello redondo."
+        tallas: "S; M; L"
+        precio: "45 €"
+        estado: Rebajas
+        imagen: /fotos/producto-3.jpg
+        detalle: |
+          Un jersey de entretiempo que apetece llevar a diario. Es de algodón orgánico en punto grueso, con un tacto mullido y sin esa rigidez de los jerséis nuevos. El cuello redondo es sencillo y queda bien solo o con una camisa asomando por debajo.
+
+          Lo tejen en el norte de Portugal con hilo que no pica ni suelta pelusa, y aguanta lavados a baja temperatura sin deformarse. Conviene secarlo en plano para que conserve la forma.
+
+          Lo tenemos en rebajas porque queda poco de la serie de esta temporada, pero la calidad es la de siempre. Es una buena prenda para empezar a construir un armario que combine: se lleva con pantalón ancho, con vaqueros o con una falda midi. Escríbenos y te lo guardamos.
+      - nombre: Camisa de lino lavado
+        ref: SL-2617
+        categoria: Hombre
+        texto: "Cuello italiano y botones de nácar. En arena, blanco y azul."
+        tallas: "S; M; L; XL; XXL"
+        precio: "65 €"
+        estado: Nuevo
+        imagen: /fotos/producto-4.jpg
+        detalle: |
+          La camisa de siempre, bien hecha. El lino lavado es suave desde el primer día y tiene ese aire de prenda ya querida que no necesita plancha. El cuello italiano queda bien abierto en verano y se sostiene con corbata si el día lo pide.
+
+          Los botones son de nácar, cosidos con refuerzo, y el bajo es recto para llevarla dentro o fuera del pantalón. La tenemos en arena, en blanco y en azul, así que es fácil que alguno te encaje con lo que ya tienes en casa.
+
+          Va muy bien con pantalón de pana fina en otoño y con bermudas cuando aprieta el calor. Si te queda larga de manga, te la ajustamos en el día. Para reservar tu talla, escríbenos por WhatsApp.
+      - nombre: Chaqueta de pana fina
+        ref: SL-2560
+        categoria: Hombre
+        texto: "Forro de algodón y tres bolsillos. Para las tardes de otoño."
+        tallas: "M; L; XL"
+        precio: "129 €"
+        estado: ""
+        imagen: /fotos/producto-5.jpg
+        detalle: |
+          Una chaqueta ligera para las tardes de otoño, cuando ya refresca pero todavía no hace falta abrigo. La pana fina es más ligera que la clásica, no pesa en los hombros y se lleva abierta sobre una camisa o un jersey de cuello redondo.
+
+          Tiene forro de algodón, tres bolsillos y cierre con botones, y un corte recto que no marca demasiado. Es de las prendas que mejoran con los años: el tejido se suaviza y el color se asienta con el uso.
+
+          La recomendamos para quien busca una pieza que sirva para el día a día y para salir sin cambiarse. Pruébatela en la tienda con calma, que tenemos probadores amplios y buena luz, y si hace falta le acortamos las mangas en el día.
+      - nombre: Bolso de rafia y piel
+        ref: SL-2598
+        categoria: Complementos
+        texto: "Tejido a mano en Mallorca, asas de piel curtida."
+        tallas: Talla única
+        precio: "95 €"
+        estado: Nuevo
+        imagen: /fotos/producto-6.jpg
+        detalle: |
+          Un bolso para llevar todo el verano y parte del otoño. La rafia se teje a mano en Mallorca por artesanas de la isla, y cada pieza sale ligeramente distinta de la anterior. Las asas son de piel curtida, que con el uso coge un tono más oscuro y un tacto muy agradable.
+
+          Tiene capacidad para lo esencial del día: cartera, llaves, gafas y una botella pequeña. El interior lleva forro de algodón y un bolsillo con cremallera para que no se pierda nada en el fondo.
+
+          Para cuidarlo, evita la lluvia fuerte y guárdalo con papel dentro para que mantenga la forma. Es talla única y combina con casi todo, desde un vestido de lino hasta unos vaqueros. Si quieres verlo antes de decidir, pásate por la tienda o pregúntanos por WhatsApp.
 
   cita:
     activa: true
