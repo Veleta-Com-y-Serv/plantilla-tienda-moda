@@ -5,6 +5,7 @@
 // site.yaml → marca_pie no es false. Con WhatsApp en contacto, botón flotante para escribir.
 import { site, tel, mapa, whatsapp, buscarSeccion, clave } from '../data/site';
 import Icono from './ui/Icono.astro';
+import { rutaDeSeccion } from '../lib/multipagina';
 interface Props { variante?: string }
 const { variante = 'moda' } = Astro.props;
 const c = site.contacto;
@@ -12,7 +13,7 @@ const redes = Object.entries(site.redes).filter(([, url]) => url);
 const anio = new Date().getFullYear();
 const cols = buscarSeccion('colecciones');
 const productos = buscarSeccion('productos');
-const destino = productos ? `/#${productos.id}` : cols ? `/#${cols.id}` : '/';
+const destino = productos ? rutaDeSeccion(productos.id) : cols ? rutaDeSeccion(cols.id) : '/';
 const colecciones = cols ? cols.s.colecciones.filter((x) => x.nombre).slice(0, 10) : [];
 const wa = whatsapp(c.whatsapp, `Hola, os escribo desde la web de ${site.nombre}.`);
 ---

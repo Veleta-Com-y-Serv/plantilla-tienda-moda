@@ -24,7 +24,7 @@ secciones:
   - { id: contacto, nombre: Contacto }
 estilo: editorial
 plan_minimo: presencia
-version: 1.1.0
+version: 1.2.0
 base: astrowind
 demo_url: https://demo-plantilla-tienda-moda.noexpertise.com
 activa: true
@@ -33,6 +33,13 @@ orden: 240
 # Páginas propias (docs/plantillas.md § Fichas por elemento y páginas por zona). Espejo en src/data/fichas.ts.
 fichas:
   - { lista: productos, campo: productos, ruta: productos, nombre: Producto, tipo: Product }
+
+# Varias páginas (docs/plantillas.md § Varias páginas): reparto recomendado al activar «Varias páginas».
+# Inicio se queda con la portada y lo que no esté en ninguna página (aquí, lookbook, pregunta por whatsapp).
+paginas:
+  - { ruta: colecciones, titulo: Colecciones, secciones: "colecciones; productos" }
+  - { ruta: la-tienda, titulo: La tienda, secciones: "sobre; ventajas; tienda; opiniones" }
+  - { ruta: contacto, titulo: Contacto, secciones: "cita; preguntas; contacto" }
 
 # Asistente de puesta en marcha (NoExpertise): un paso por pantalla. Rutas del site sin índices;
 # tipos: texto y lista (la IA propone), datos, fotos, eleccion (colores y logo) y repaso.

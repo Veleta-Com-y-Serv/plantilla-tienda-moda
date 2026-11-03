@@ -2,6 +2,7 @@
 // Página no encontrada con el diseño de la plantilla: banda negra a casi pantalla completa con «404» en serif enorme.
 import Base from '../layouts/Base.astro';
 import { buscarSeccion } from '../data/site';
+import { rutaDeSeccion } from '../lib/multipagina';
 const productos = buscarSeccion('productos');
 ---
 
@@ -14,7 +15,7 @@ const productos = buscarSeccion('productos');
       <p class="mt-6 max-w-[42ch] opacity-80">Puede que el enlace esté mal o que la prenda ya no esté en la tienda.</p>
       <div class="mt-10 flex flex-wrap gap-3">
         <a class="btn btn--claro" href="/">Volver al inicio</a>
-        {productos && <a class="btn-sec" href={`/#${productos.id}`}>{productos.s.antetitulo || productos.s.titulo}</a>}
+        {productos && <a class="btn-sec" href={rutaDeSeccion(productos.id)}>{productos.s.antetitulo || productos.s.titulo}</a>}
       </div>
     </div>
   </section>

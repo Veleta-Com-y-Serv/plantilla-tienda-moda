@@ -7,11 +7,12 @@ import { seccion, buscarSeccion, clave } from '../../data/site';
 import { altFicha } from '../../lib/seo';
 import Titular from '../ui/Titular.astro';
 import Imagen from '../ui/Imagen.astro';
+import { rutaDeSeccion } from '../../lib/multipagina';
 interface Props { id: string }
 const s = seccion(Astro.props.id);
 const lista = s ? s.colecciones.filter((c) => c.nombre) : [];
 const productos = buscarSeccion('productos');
-const destino = productos ? `/#${productos.id}` : '';
+const destino = productos ? rutaDeSeccion(productos.id) : '';
 const columnas = Math.min(Math.max(lista.length, 1), 4);
 ---
 

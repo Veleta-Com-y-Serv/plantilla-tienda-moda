@@ -11,6 +11,7 @@ import { buscarSeccion, conPrecio, partes, site, tel, whatsapp } from '../../dat
 import { fichas, relacionadas, resumen } from '../../lib/paginas';
 import type { Ficha } from '../../lib/paginas';
 import { altGaleria, jsonLdFicha, jsonLdMigas, urlBase } from '../../lib/seo';
+import { enlace, rutaDeSeccion } from '../../lib/multipagina';
 
 export function getStaticPaths() {
   return fichas().map((f) => ({ params: { coleccion: f.def.ruta, slug: f.slug }, props: { f } }));
@@ -22,12 +23,12 @@ const base = urlBase(Astro.site);
 const nombreSeccion = String(f.seccion.antetitulo || f.seccion.titulo || f.def.nombre).trim();
 const migas = [
   { nombre: 'Inicio', ruta: '/' },
-  { nombre: nombreSeccion, ruta: `/#${f.idSeccion}` },
+  { nombre: nombreSeccion, ruta: rutaDeSeccion(f.idSeccion) },
   { nombre: f.titulo, ruta: f.url },
 ];
 const c = site.contacto;
 const contacto = buscarSeccion('contacto');
-const formulario = contacto ? `/#${contacto.id}` : site.boton_cabecera?.url || '/#contacto';
+const formulario = contacto ? rutaDeSeccion(contacto.id) : site.boton_cabecera?.url || enlace('/#contacto');
 const ref = String(f.elemento.ref ?? '').trim();
 const estado = String(f.elemento.estado ?? '').trim();
 const tallas = partes(String(f.elemento.tallas ?? ''));
@@ -132,7 +133,7 @@ const estadoClase = /^nuev/i.test(estado) ? 'estado--nuevo' : /rebaj|oferta|outl
             </li>
           ))}
         </ul>
-        <p class="mt-12"><a class="btn-sec" href={`/#${f.idSeccion}`}>Ver todas las novedades</a></p>
+        <p class="mt-12"><a class="btn-sec" href={rutaDeSeccion(f.idSeccion)}>Ver todas las novedades</a></p>
       </div>
     </section>
   )}
